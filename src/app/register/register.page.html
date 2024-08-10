@@ -1,1 +1,14 @@
-<p>register works!</p>
+<h1>Register</h1>
+<section *ngIf="section == 0">
+    <h2>Account Details</h2>
+    <input type="email" [(ngModel)]="email" placeholder="E-mail">
+    <input type="password" [(ngModel)]="password" placeholder="Password">
+    <button (click)="nextSection()">Next</button>
+</section>
+<section *ngIf="section == 1">
+    <button (click)="prevSection()">Back</button>
+    <h2>Personal Information</h2>
+    <input type="text" [(ngModel)]="fullname" placeholder="Full Name">
+    <input type="password" [(ngModel)]="password" placeholder="Gender">
+    <button (click)="register()">Register</button>
+</section>
