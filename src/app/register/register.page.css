@@ -1,0 +1,88 @@
+.root {
+    background: gray;
+    display: flex;
+    align-items: center;
+    min-height: 100vh;
+    justify-content: center;
+    background: linear-gradient(to bottom, #f2994a, #f2c94c);
+}
+
+main {
+    display: flex;
+    align-items: center;
+    padding: 32px;
+    border-radius: 16px;
+    flex-direction: column;
+    background: white;
+    box-shadow: -12px 12px 0px 0px rgba(255, 255, 255, 0.5);
+}
+
+h1 {
+    margin: 0;
+    cursor: default;
+}
+
+h2 {
+    font-size: 1.25em;
+    cursor: default;
+    color: lightgray;
+    font-family: "Mona Sans Condensed", Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+}
+
+h2 > b {
+    color: black;
+}
+
+section {
+    margin-top: 16px;
+    display: flex;
+    width: 480px;
+    flex-direction: column;
+}
+
+label {
+    font-size: 12px;
+    font-weight: 700;
+}
+
+input {
+    border: 1px lightgray solid;
+    border-radius: 4px;
+    padding: 8px;
+    margin: 8px 0;
+}
+
+button {
+    background: rgb(123, 80, 0);
+    border: none;
+    text-align: center;
+    border-radius: 4px;
+    color: white;
+    height: 32px;
+    padding: 8px;
+    cursor: pointer;
+}
+
+.login-link {
+    text-decoration: none;
+    color: rgb(187, 121, 0);
+    font-weight: 700;
+    font-size: .8em;
+}
+
+.back-button {
+    background: transparent;
+    color: rgb(123, 80, 0);
+    border: 2px rgb(123, 80, 0) solid;
+    padding: 6px;
+}
+
+.submit-button {
+    margin-left: auto;
+    width: 80px;
+}
+
+.section-actions {
+    margin-top: 8px;
+    display: flex;
+}

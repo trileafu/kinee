@@ -1,0 +1,94 @@
+.root {
+    background: gray;
+    display: flex;
+    align-items: center;
+    min-height: 100vh;
+    justify-content: center;
+    background: linear-gradient(to bottom, #f2994a, #f2c94c);
+}
+
+main {
+    display: flex;
+    align-items: center;
+    padding: 32px;
+    border-radius: 16px;
+    flex-direction: column;
+    background: white;
+    box-shadow: 12px -12px 0px 0px rgba(255, 255, 255, 0.5);
+}
+
+section {
+    display: flex;
+    margin-top: 16px;
+    width: 480px;
+    flex-direction: column;
+}
+
+h1 {
+    margin: 0;
+}
+label {
+    font-size: 12px;
+    font-weight: 700;
+}
+
+input {
+    border: 1px lightgray solid;
+    border-radius: 4px;
+    padding: 8px;
+    margin: 4px 0;
+}
+
+button {
+    background: rgb(123, 80, 0);
+    border: none;
+    text-align: center;
+    border-radius: 4px;
+    color: white;
+    height: 32px;
+    padding: 8px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 80px;
+    margin-top: 8px;
+}
+
+.register-link {
+    text-decoration: none;
+    color: rgb(187, 121, 0);
+    font-weight: 700;
+    font-size: .8em;
+}
+
+.forgot-link {
+    text-decoration: none;
+    color: rgb(122, 79, 0);
+    font-weight: 700;
+    font-size: .8em;
+}
+
+.checkbox-container {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.checkbox-container > input {
+    width: 20px;
+    height: 20px;
+    padding: 2px;
+}
+
+.checkbox-container > label {
+    text-decoration: none;
+    color: rgb(122, 79, 0);
+    font-weight: 700;
+    font-size: .8em;
+}
+
+.section-actions {
+    margin-top: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
