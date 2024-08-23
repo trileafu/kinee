@@ -3,21 +3,36 @@
         <h1>Mari memulai</h1>
         <a class="login-link" routerLink="/login">Sudah memiliki akun?</a>
         <section *ngIf="section == 0">
-            <h2><b>Detail Akun</b> · Informasi Pribadi</h2>
-            <label for="email">Alamat sur-el</label>
-            <input type="email" id="email" [(ngModel)]="email" placeholder="bagus.prstyo@contoh.com">
-            <label for="password">Kata sandi</label>
-            <input type="password" id="password" [(ngModel)]="password" placeholder="admin#1234">
+            <div class="section-content">
+                <h2><b>Detail Akun</b> · Informasi Pribadi</h2>
+                <label for="email">Alamat sur-el</label>
+                <input type="email" id="email" [(ngModel)]="email" placeholder="bagus.prstyo@contoh.com">
+                <label for="password">Kata sandi</label>
+                <input type="password" id="password" [(ngModel)]="password" placeholder="admin#1234">
+            </div>
             <div class="section-actions">
                 <button class="submit-button" (click)="nextSection()">Lanjut</button>
             </div>
         </section>
         <section *ngIf="section == 1">
-            <h2>Detail Akun · <b>Informasi Pribadi</b></h2>
-            <label for="fullname">Nama Lengkap</label>
-            <input type="text" id="fullname" [(ngModel)]="fullname" placeholder="Bagus Prasetiyo">
-            <label for="gender">Jenis Kelamin</label>
-            <input type="text" id="gender" [(ngModel)]="gender" placeholder="Gender">
+            <div class="section-content">
+                <h2>Detail Akun · <b>Informasi Pribadi</b></h2>
+                <label for="fullname">Nama Lengkap</label>
+                <input type="text" id="fullname" [(ngModel)]="fullname" placeholder="Bagus Prasetiyo">
+                <label for="gender">Jenis Kelamin</label>
+                <span class="radio-container">
+                    <input type="radio" id="male" name="gender">
+                    <label for="male">Laki-laki</label>
+                </span>
+                <span class="radio-container">
+                    <input type="radio" id="female" name="gender">
+                    <label for="female">Perempuan</label>
+                </span>
+                <span class="radio-container">
+                    <input type="radio" id="unspecified" name="gender">
+                    <label for="unspecified">Tidak menjawab</label>
+                </span>
+            </div>
             <div class="section-actions">
                 <button class="back-button" (click)="prevSection()"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                     stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-left">

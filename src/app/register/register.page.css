@@ -9,6 +9,7 @@
 
 main {
     display: flex;
+    height: 50vh;
     align-items: center;
     padding: 32px;
     border-radius: 16px;
@@ -34,10 +35,12 @@ h2 > b {
 }
 
 section {
-    margin-top: 16px;
     display: flex;
     width: 480px;
+    height: 100%;
+    justify-content: space-between;
     flex-direction: column;
+    overflow: scroll;
 }
 
 label {
@@ -82,7 +85,27 @@ button {
     width: 80px;
 }
 
-.section-actions {
-    margin-top: 8px;
+.section-content {
+    margin-top: 16px;
     display: flex;
+    width: 100%;
+    overflow: scroll;
+    flex-direction: column;
+}
+
+.section-actions {
+    width: 100%;
+    align-self: flex-end;
+    display: flex;
+}
+
+.radio-container {
+    display: flex;
+    align-items: center;
+}
+
+.radio-container > label {
+    font-size: 14px;
+    font-weight: 500;
+    margin-left: 8px;
 }

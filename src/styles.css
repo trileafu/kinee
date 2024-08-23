@@ -28,8 +28,32 @@ input[type="checkbox"]::before {
     border-radius: 2px;
     transform: scale(0);
     background-color: rgb(187, 121, 0);
+    transition: 120ms transform ease-in-out;
 }
 
 input[type="checkbox"]:checked::before {
+    transform: scale(1);
+}
+
+input[type="radio"] {
+    -webkit-appearance: none;
+    appearance: none;
+    border-radius: 100%;
+    background-color: #fff;
+    margin: 0;
+}
+
+input[type="radio"]::before {
+    content: "";
+    display: block;
+    width: 16px;
+    height: 16px;
+    border-radius: 100%;
+    transform: scale(0);
+    background-color: black;
+    transition: 120ms transform ease-in-out;
+}
+
+input[type="radio"]:checked::before {
     transform: scale(1);
 }
