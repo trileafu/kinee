@@ -61,69 +61,69 @@ export function app(): express.Express {
     'mongodb://kinee:kineepublic@trileafu-shard-00-00.s92hh.mongodb.net:27017,trileafu-shard-00-01.s92hh.mongodb.net:27017,trileafu-shard-00-02.s92hh.mongodb.net:27017/?ssl=true&replicaSet=atlas-q3vmyy-shard-0&authSource=admin&retryWrites=true&w=majority&appName=trileafu'
   );
   const commonEngine = new CommonEngine();
-  // let db: Db;
-  // client.connect().then(() => (db = client.db('kinee')));
+  let db: Db;
+  client.connect().then(() => (db = client.db('kinee')));
 
   server.use(express.json());
 
-  // server.post('/api/account/register', (req, res) => {
-  //   if (!req.body.email || !req.body.password || !req.body.fullname) {
-  //     res.status(400);
-  //     return res.send('Data tidak lengkap');
-  //   }
-  //   db.collection('accounts')
-  //     .findOne({ email: req.body.email })
-  //     .then((account) => {
-  //       if (account) {
-  //         res.status(400);
-  //         return res.send('Sur-el sudah digunakan');
-  //       } else {
-  //         db.collection('accounts').insertOne({
-  //           email: req.body.email,
-  //           password: req.body.password,
-  //           fullname: req.body.fullname,
-  //           gender: req.body.gender || 0,
-  //         });
-  //         return res.sendStatus(201);
-  //       }
-  //     })
-  //     .catch((err) => {
-  //       res.status(500);
-  //       return res.send(err);
-  //     });
-  //   return;
-  // });
+  server.post('/api/account/register', (req, res) => {
+    if (!req.body.email || !req.body.password || !req.body.fullname) {
+      res.status(400);
+      return res.send('Data tidak lengkap');
+    }
+    db.collection('accounts')
+      .findOne({ email: req.body.email })
+      .then((account) => {
+        if (account) {
+          res.status(400);
+          return res.send('Sur-el sudah digunakan');
+        } else {
+          db.collection('accounts').insertOne({
+            email: req.body.email,
+            password: req.body.password,
+            fullname: req.body.fullname,
+            gender: req.body.gender || 0,
+          });
+          return res.sendStatus(201);
+        }
+      })
+      .catch((err) => {
+        res.status(500);
+        return res.send(err);
+      });
+    return;
+  });
 
-  // server.post('/api/account/login', (req, res) => {
-  //   db.collection('accounts')
-  //     .findOne({ email: req.body.email, password: req.body.password })
-  //     .then((account) => {
-  //       if (!account) return res.sendStatus(404);
-  //       return res.send(
-  //         sign(
-  //           {
-  //             email: account['email'],
-  //           },
-  //           `${process.env['JWT_SECRET']}`,
-  //           { expiresIn: '8h' }
-  //         )
-  //       );
-  //     });
-  // });
+  server.post('/api/account/login', (req, res) => {
+    db.collection('accounts')
+      .findOne({ email: req.body.email, password: req.body.password })
+      .then((account) => {
+        if (!account) return res.sendStatus(404);
+        return res.send(
+          sign(
+            {
+              email: account['email'],
+            },
+            `${process.env['JWT_SECRET']}`,
+            { expiresIn: '8h' }
+          )
+        );
+      });
+  });
 
-  // server.get('/api/account/me', authenticateToken, (req, res) => {
-  //   db.collection('accounts')
-  //     .findOne({ email: req.email })
-  //     .then((account) => {
-  //       if (!account) return res.sendStatus(404);
-  //       res.json({
-  //         email: account['email'],
-  //         fullname: account['fullname'],
-  //         gender: account['gender'],
-  //       });
-  //       return;
-  //     });
-  // });
+  server.get('/api/account/me', authenticateToken, (req, res) => {
+    db.collection('accounts')
+      .findOne({ email: req.email })
+      .then((account) => {
+        if (!account) return res.sendStatus(404);
+        res.json({
+          email: account['email'],
+          fullname: account['fullname'],
+          gender: account['gender'],
+        });
+        return;
+      });
+  });
 
   server.set('view engine', 'html');
   server.set('views', browserDistFolder);
