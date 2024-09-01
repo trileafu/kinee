@@ -1,12 +1,17 @@
 import express, { NextFunction, Request, Response } from 'express';
 import { MongoClient, Db } from 'mongodb';
-import { sign, verify } from 'jsonwebtoken';
-import { exit } from 'process';
+import { JwtPayload, sign, verify } from 'jsonwebtoken';
 
-enum Gender {
-  Unspecified,
-  Male,
-  Female,
+declare global {
+  namespace Express {
+    interface Request {
+      email: string;
+    }
+  }
+}
+
+interface AccountToken extends JwtPayload {
+  email: string;
 }
 
 function authenticateToken(
@@ -14,17 +19,30 @@ function authenticateToken(
   res: Response,
   next: NextFunction
 ): void {
-  console.log(req.headers);
   if (!req.headers.authorization) {
     res.sendStatus(403);
+    return;
   }
   if (!req.headers.authorization!.startsWith('Bearer')) {
     res.sendStatus(403);
+    return;
   }
-  let data = verify(
-    req.headers.authorization!.split(' ')[1],
-    `${process.env['JWT_SECRET']}`
-  );
+  try {
+    let data = verify(
+      req.headers.authorization!.split(' ')[1],
+      `${process.env['JWT_SECRET']}`
+    ) as AccountToken;
+    if (data.exp! < Date.now() / 1000) {
+      res.sendStatus(403);
+      return;
+    } else {
+      req.email = data.email;
+    }
+  } catch {
+    res.sendStatus(403);
+    return;
+  }
+  next();
 }
 
 export function app(): express.Express {
@@ -41,10 +59,9 @@ export function app(): express.Express {
       return res.send('Data tidak lengkap');
     }
     db.collection('accounts')
-      .find({ email: req.body.email })
-      .toArray()
-      .then((accounts) => {
-        if (accounts.length > 0) {
+      .findOne({ email: req.body.email })
+      .then((account) => {
+        if (account) {
           res.status(400);
           return res.send('Sur-el sudah digunakan');
         } else {
@@ -66,15 +83,13 @@ export function app(): express.Express {
 
   server.post('/api/account/login', (req, res) => {
     db.collection('accounts')
-      .find({ email: req.body.email, password: req.body.password })
-      .toArray()
-      .then((accounts) => {
-        if (accounts.length < 1) return res.sendStatus(404);
+      .findOne({ email: req.body.email, password: req.body.password })
+      .then((account) => {
+        if (!account) return res.sendStatus(404);
         return res.send(
           sign(
             {
-              email: accounts[0]['email'],
-              fullname: accounts[0]['fullname'],
+              email: account['email'],
             },
             `${process.env['JWT_SECRET']}`,
             { expiresIn: '8h' }
@@ -85,10 +100,14 @@ export function app(): express.Express {
 
   server.get('/api/account/me', authenticateToken, (req, res) => {
     db.collection('accounts')
-      .find({ email: req.body.email, password: req.body.password })
-      .toArray()
-      .then((accounts) => {
-        if (accounts.length < 1) return res.sendStatus(404);
+      .findOne({ email: req.email })
+      .then((account) => {
+        if (!account) return res.sendStatus(404);
+        res.json({
+          email: account['email'],
+          fullname: account['fullname'],
+          gender: account['gender'],
+        });
         return;
       });
   });
