@@ -15,7 +15,9 @@ export class LoginPage {
   email = '';
   password = '';
   remember = false;
+  loggingIn = false;
   login() {
+    this.loggingIn = true;
     this.http
       .post('/api/account/login', {
         email: this.email,
@@ -23,7 +25,8 @@ export class LoginPage {
       })
       .subscribe({
         error: (e) => {
-          alert(e.error);
+          alert("Sur-el atau kata sandi salah.");
+          this.loggingIn = false;
         },
         next: (d: any) => {
           this.remember

@@ -14,7 +14,7 @@
                 </span>
                 <a class="forgot-link">Lupa kata sandi?</a>
             </div>
-            <button class="submit-button" (click)="login()">Masuk</button>
+            <button class="submit-button" [disabled]="loggingIn" (click)="login()">Masuk</button>
         </section>
     </main>
 </div>

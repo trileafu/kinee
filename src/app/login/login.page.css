@@ -55,6 +55,10 @@ button {
     cursor: pointer;
 }
 
+button:disabled {
+    opacity: .5;
+}
+
 .register-link {
     text-decoration: none;
     color: rgb(187, 121, 0);
