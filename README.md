@@ -11,7 +11,7 @@ Sebuah contoh aplikasi menggunakan akun dengan sistem _login_, _register_, dan _
 - [Node.js](https://nodejs.org) (_runtime_)
 
 ## _Environment Variables_
-`JWT_SECRET`: _String_ digunakan untuk menandatangani (_sign_) token akun.
+`JWT_SECRET`: _String_ digunakan untuk menandatangani (_sign_) token akun.  
 `MONGO_URI`: URI untuk terhubung ke server MongoDB beserta kredensialnya.
 
 ## Fitur
