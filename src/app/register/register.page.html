@@ -10,7 +10,7 @@
                 <label for="password">Kata sandi</label>
                 <input type="password" id="password" (input)="passwordCheck()" [(ngModel)]="password" placeholder="Admin#1234">
                 <p *ngIf="showErrors && !emailValid" class="input-error">Alamat sur-el tidak valid.</p>
-                <p *ngIf="showErrors && !passwordValid" class="input-error">Minimal 8 karakter dengan huruf kecil, huruf besar, angka, dan simbol.</p>
+                <p *ngIf="showErrors && !passwordValid" class="input-error">Kata sandi minimal 8 karakter dengan huruf kecil, huruf besar, angka, dan simbol.</p>
             </div>
             <div class="section-actions">
                 <button class="submit-button" (click)="nextSection()">Lanjut</button>
