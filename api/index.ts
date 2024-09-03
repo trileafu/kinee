@@ -1,4 +1,4 @@
-import { MongoClient, Db } from 'mongodb';
+import { MongoClient } from 'mongodb';
 import jsonwebtoken from 'jsonwebtoken';
 import { VercelRequest } from '@vercel/node/dist';
 

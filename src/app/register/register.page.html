@@ -6,9 +6,11 @@
             <div class="section-content">
                 <h2><b>Detail Akun</b> · Informasi Pribadi</h2>
                 <label for="email">Alamat sur-el</label>
-                <input type="email" id="email" [(ngModel)]="email" placeholder="bagus.prstyo@contoh.com">
+                <input type="email" id="email" [(ngModel)]="email" (input)="emailCheck()" placeholder="bagus.prstyo@contoh.com">
                 <label for="password">Kata sandi</label>
-                <input type="password" id="password" [(ngModel)]="password" placeholder="admin#1234">
+                <input type="password" id="password" (input)="passwordCheck()" [(ngModel)]="password" placeholder="Admin#1234">
+                <p *ngIf="showErrors && !emailValid" class="input-error">Alamat sur-el tidak valid.</p>
+                <p *ngIf="showErrors && !passwordValid" class="input-error">Minimal 8 karakter dengan huruf kecil, huruf besar, angka, dan simbol.</p>
             </div>
             <div class="section-actions">
                 <button class="submit-button" (click)="nextSection()">Lanjut</button>
@@ -18,18 +20,18 @@
             <div class="section-content">
                 <h2>Detail Akun · <b>Informasi Pribadi</b></h2>
                 <label for="fullname">Nama Lengkap</label>
-                <input type="text" id="fullname" [(ngModel)]="fullname" placeholder="Bagus Prasetiyo">
+                <input type="text" id="fullname" [(ngModel)]="fullname" (input)="detailsCheck()" placeholder="Bagus Prasetiyo">
                 <label for="gender">Jenis Kelamin</label>
                 <span class="radio-container">
-                    <input type="radio" id="male" name="gender">
+                    <input type="radio" value="male" [(ngModel)]="gender" (change)="detailsCheck()" name="gender">
                     <label for="male">Laki-laki</label>
                 </span>
                 <span class="radio-container">
-                    <input type="radio" id="female" name="gender">
+                    <input type="radio" value="female" [(ngModel)]="gender" (change)="detailsCheck()" name="gender">
                     <label for="female">Perempuan</label>
                 </span>
                 <span class="radio-container">
-                    <input type="radio" id="unspecified" name="gender">
+                    <input type="radio" value="unspecified" [(ngModel)]="gender" (change)="detailsCheck()" name="gender">
                     <label for="unspecified">Tidak menjawab</label>
                 </span>
             </div>
@@ -39,7 +41,7 @@
                     <line x1="19" y1="12" x2="5" y2="12"></line>
                     <polyline points="12 19 5 12 12 5"></polyline>
                 </svg></button>
-                <button class="submit-button" (click)="register()">Daftar</button>
+                <button class="submit-button" [disabled]="!detailsValid" (click)="register()">Daftar</button>
             </div>
         </section>
     </main>

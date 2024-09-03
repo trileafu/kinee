@@ -1,5 +1,5 @@
 import { NgIf } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, ElementRef } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 
@@ -16,13 +16,46 @@ export class RegisterPage {
   password = '';
   fullname = '';
   gender = '';
+  showErrors = false;
+  detailsValid = false;
+  emailValid = false;
+  passwordValid = false;
+
   prevSection() {
     this.section--;
   }
+
   nextSection() {
-    this.section++;
+    this.showErrors = true;
+    if (this.emailValid && this.passwordValid) this.section++;
   }
+
+  emailCheck() {
+    this.emailValid = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(this.email);
+  }
+
+  passwordCheck() {
+    this.passwordValid =
+      this.password.length > 8 &&
+      /[a-z]/.test(this.password) &&
+      /[A-Z]/.test(this.password) &&
+      /[0-9]/.test(this.password) &&
+      /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/.test(this.password);
+  }
+
+  detailsCheck() {
+    this.detailsValid = this.fullname != '' && this.gender != '';
+  }
+
   register() {
-    alert(this.email + '\n' + this.password);
+    alert(
+      this.email +
+        '\n' +
+        this.password +
+        '\n' +
+        this.fullname +
+        '\n' +
+        this.gender
+    );
   }
 }

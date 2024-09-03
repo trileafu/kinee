@@ -85,6 +85,10 @@ button {
     width: 80px;
 }
 
+.submit-button:disabled {
+    opacity: .5;
+}
+
 .section-content {
     margin-top: 16px;
     display: flex;
@@ -113,4 +117,10 @@ button {
     font-weight: 500;
     margin-left: 8px;
     cursor: pointer;
+}
+
+.input-error {
+    color: red;
+    margin: 0;
+    font-size: 14px;
 }
