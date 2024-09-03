@@ -27,6 +27,7 @@ section {
 h1 {
     margin: 0;
 }
+
 label {
     font-size: 12px;
     font-weight: 700;
@@ -51,6 +52,7 @@ button {
     margin-right: auto;
     width: 80px;
     margin-top: 8px;
+    cursor: pointer;
 }
 
 .register-link {

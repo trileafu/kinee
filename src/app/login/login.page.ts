@@ -1,6 +1,7 @@
+import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -10,9 +11,22 @@ import { RouterLink } from '@angular/router';
   styleUrl: './login.page.css',
 })
 export class LoginPage {
+  constructor(private http: HttpClient, private router: Router) {}
   email = '';
   password = '';
+  remember = false;
   login() {
-    alert(this.email + '\n' + this.password);
+    this.http
+      .post('/api/account/login', {
+        email: this.email,
+        password: this.password,
+      })
+      .subscribe({
+        next: (d: any) => {
+          this.remember
+            ? localStorage.setItem('authToken', d.token)
+            : sessionStorage.setItem('authToken', d.token);
+        },
+      });
   }
 }

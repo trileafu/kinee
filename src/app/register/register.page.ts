@@ -3,7 +3,6 @@ import { HttpClient } from '@angular/common/http';
 import { Component, ElementRef } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
-import { genSalt, hash } from 'bcryptjs';
 
 @Component({
   selector: 'app-register',
@@ -52,29 +51,25 @@ export class RegisterPage {
 
   register() {
     this.detailsValid = false;
-    genSalt(6)
-      .then((salt) => hash(this.password, salt))
-      .then((hashed) => {
-        this.http
-          .post('/api/account/register', {
-            email: this.email,
-            password: hashed,
-            fullname: this.fullname,
-            gender: this.gender,
-          })
-          .subscribe({
-            error: (e) => {
-              alert(e.error);
-              this.section = 0;
-              this.email = '';
-              this.password = '';
-              this.fullname = '';
-              this.gender = ''
-            },
-            next: () => {
-              this.router.navigateByUrl('/login');
-            },
-          });
+    this.http
+      .post('/api/account/register', {
+        email: this.email,
+        password: this.password,
+        fullname: this.fullname,
+        gender: this.gender,
+      })
+      .subscribe({
+        error: (e) => {
+          alert(e.error);
+          this.section = 0;
+          this.email = '';
+          this.password = '';
+          this.fullname = '';
+          this.gender = '';
+        },
+        next: () => {
+          this.router.navigateByUrl('/login');
+        },
       });
   }
 }

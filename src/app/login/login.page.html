@@ -6,15 +6,15 @@
             <label for="email">Alamat sur-el</label>
             <input type="email" id="email" [(ngModel)]="email" placeholder="bagus.prstyo@contoh.com">
             <label for="password">Kata sandi</label>
-            <input type="password" id="password" [(ngModel)]="password" placeholder="admin#1234">
+            <input type="password" id="password" [(ngModel)]="password" placeholder="Admin#1234">
             <div class="section-actions">
                 <span class="checkbox-container">
-                    <input type="checkbox" id="remember">
+                    <input type="checkbox" id="remember" [(ngModel)]="remember">
                     <label for="remember">Ingat saya</label><br>
                 </span>
                 <a class="forgot-link">Lupa kata sandi?</a>
             </div>
-            <button class="submit-button">Masuk</button>
+            <button class="submit-button" (click)="login()">Masuk</button>
         </section>
     </main>
 </div>

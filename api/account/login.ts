@@ -1,6 +1,8 @@
 import { VercelRequest, VercelResponse } from '@vercel/node/dist';
 import { clientDb } from '../index.js';
 import jsonwebtoken from 'jsonwebtoken';
+import pkg from 'bcryptjs';
+const { compare } = pkg;
 
 export default function (
   req: VercelRequest,
@@ -10,18 +12,26 @@ export default function (
   clientDb.connect().then((client) => {
     let db = client.db('kinee');
     db.collection('accounts')
-      .findOne({ email: req.body.email, password: req.body.password })
+      .findOne({ email: req.body.email })
       .then((account) => {
         if (!account) return res.status(404).send('');
-        return res.json({
-          token: jsonwebtoken.sign(
-            {
-              email: account['email'],
-            },
-            `${process.env['JWT_SECRET']}`,
-            { expiresIn: '8h' }
-          ),
-        });
+        compare(req.body.password, account['password'])
+          .then((result) => {
+            if (result) {
+              return res.json({
+                token: jsonwebtoken.sign(
+                  {
+                    email: account['email'],
+                  },
+                  `${process.env['JWT_SECRET']}`,
+                  { expiresIn: '8h' }
+                ),
+              });
+            } else {
+              return res.status(404).send('');
+            }
+          })
+          .catch((err) => console.log(err));
       })
       .catch((err) => {
         return res.status(500).send(err);

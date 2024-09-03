@@ -1,6 +1,8 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node/dist';
 import { clientDb } from '../index.js';
 import jsonwebtoken from 'jsonwebtoken';
+import pkg from 'bcryptjs';
+const { hash } = pkg;
 
 export default function (
   req: VercelRequest,
@@ -18,13 +20,15 @@ export default function (
         if (account) {
           return res.status(400).send('Sur-el sudah digunakan');
         } else {
-          db.collection('accounts').insertOne({
-            email: req.body.email,
-            password: req.body.password,
-            fullname: req.body.fullname,
-            gender: req.body.gender || 0,
+          hash(req.body.password, 6).then((hashed) => {
+            db.collection('accounts').insertOne({
+              email: req.body.email,
+              password: hashed,
+              fullname: req.body.fullname,
+              gender: req.body.gender || 0,
+            });
+            return res.status(201).send('');
           });
-          return res.status(201).send('');
         }
       })
       .catch((err) => {
