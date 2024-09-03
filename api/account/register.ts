@@ -25,7 +25,7 @@ export default function (
               email: req.body.email,
               password: hashed,
               fullname: req.body.fullname,
-              gender: req.body.gender || 0,
+              gender: req.body.gender || 'unspecified',
             });
             return res.status(201).send('');
           });

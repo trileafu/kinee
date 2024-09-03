@@ -22,10 +22,14 @@ export class LoginPage {
         password: this.password,
       })
       .subscribe({
+        error: (e) => {
+          alert(e.error);
+        },
         next: (d: any) => {
           this.remember
             ? localStorage.setItem('authToken', d.token)
             : sessionStorage.setItem('authToken', d.token);
+          this.router.navigateByUrl('/');
         },
       });
   }

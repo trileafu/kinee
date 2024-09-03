@@ -1,0 +1,39 @@
+.root {
+    background: gray;
+    display: flex;
+    align-items: center;
+    min-height: 100vh;
+    justify-content: center;
+    background: linear-gradient(to bottom, #f2994a, #f2c94c);
+}
+
+main {
+    display: flex;
+    align-items: center;
+    padding: 32px;
+    border-radius: 16px;
+    flex-direction: column;
+    background: white;
+}
+
+section {
+    display: flex;
+    margin-top: 16px;
+    width: 480px;
+    flex-direction: column;
+}
+
+button {
+    background: rgb(123, 0, 0);
+    border: none;
+    text-align: center;
+    border-radius: 4px;
+    color: white;
+    height: 32px;
+    padding: 8px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 80px;
+    margin-top: 8px;
+    cursor: pointer;
+}
