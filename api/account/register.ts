@@ -18,16 +18,19 @@ export default function (
       .findOne({ email: req.body.email })
       .then((account) => {
         if (account) {
-          return res.status(400).send('Sur-el sudah digunakan');
+          return res.status(400).send({ error: 'Sur-el sudah digunakan' });
         } else {
           hash(req.body.password, 6).then((hashed) => {
-            db.collection('accounts').insertOne({
-              email: req.body.email,
-              password: hashed,
-              fullname: req.body.fullname,
-              gender: req.body.gender || 'unspecified',
-            });
-            return res.status(201).send('');
+            db.collection('accounts')
+              .insertOne({
+                email: req.body.email,
+                password: hashed,
+                fullname: req.body.fullname,
+                gender: req.body.gender || 'unspecified',
+              })
+              .then(() => {
+                return res.status(201).send('');
+              });
           });
         }
       })
