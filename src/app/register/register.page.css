@@ -27,7 +27,8 @@ h2 {
     font-size: 1.25em;
     cursor: default;
     color: lightgray;
-    font-family: "Mona Sans Condensed", Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    font-stretch: 75%;
+    font-family: "Mona Sans", Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
 }
 
 h2 > b {
