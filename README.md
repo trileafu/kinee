@@ -23,3 +23,8 @@ Sebuah contoh aplikasi menggunakan akun dengan sistem _login_, _register_, dan _
 ### _Dashboard_
 
 - Menyapa menggunakan nama lengkap dan hormat sesuai jenis kelamin
+
+## Catatan
+
+- Kata sandi yang disimpan di _database_ sudah dihash menggunakan [bcryptjs](https://npmjs.com/package/bcryptjs)
+- Sesi _login_ akun berlaku untuk 8 jam
