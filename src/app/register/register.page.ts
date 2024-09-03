@@ -1,7 +1,9 @@
 import { NgIf } from '@angular/common';
+import { HttpClient } from '@angular/common/http';
 import { Component, ElementRef } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
+import { genSalt, hash } from 'bcryptjs';
 
 @Component({
   selector: 'app-register',
@@ -11,6 +13,7 @@ import { RouterLink } from '@angular/router';
   styleUrl: './register.page.css',
 })
 export class RegisterPage {
+  constructor(private http: HttpClient, private router: Router) {}
   section = 0;
   email = '';
   password = '';
@@ -48,14 +51,30 @@ export class RegisterPage {
   }
 
   register() {
-    alert(
-      this.email +
-        '\n' +
-        this.password +
-        '\n' +
-        this.fullname +
-        '\n' +
-        this.gender
-    );
+    this.detailsValid = false;
+    genSalt(6)
+      .then((salt) => hash(this.password, salt))
+      .then((hashed) => {
+        this.http
+          .post('/api/account/register', {
+            email: this.email,
+            password: hashed,
+            fullname: this.fullname,
+            gender: this.gender,
+          })
+          .subscribe({
+            error: (e) => {
+              alert(e.error);
+              this.section = 0;
+              this.email = '';
+              this.password = '';
+              this.fullname = '';
+              this.gender = ''
+            },
+            next: () => {
+              this.router.navigateByUrl('/login');
+            },
+          });
+      });
   }
 }

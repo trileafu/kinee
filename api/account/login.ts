@@ -13,15 +13,15 @@ export default function (
       .findOne({ email: req.body.email, password: req.body.password })
       .then((account) => {
         if (!account) return res.status(404).send('');
-        return res.send(
-          jsonwebtoken.sign(
+        return res.json({
+          token: jsonwebtoken.sign(
             {
               email: account['email'],
             },
             `${process.env['JWT_SECRET']}`,
             { expiresIn: '8h' }
-          )
-        );
+          ),
+        });
       })
       .catch((err) => {
         return res.status(500).send(err);

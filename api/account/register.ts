@@ -1,5 +1,6 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node/dist';
 import { clientDb } from '../index.js';
+import jsonwebtoken from 'jsonwebtoken';
 
 export default function (
   req: VercelRequest,
