@@ -20,7 +20,8 @@ main {
 section {
     display: flex;
     margin-top: 16px;
-    width: 480px;
+    width: 70vw;
+    max-width: 480px;
     flex-direction: column;
 }
 
