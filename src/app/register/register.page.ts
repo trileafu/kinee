@@ -60,7 +60,7 @@ export class RegisterPage {
       })
       .subscribe({
         error: (e) => {
-          alert(e.error);
+          alert(e.error.error);
           this.section = 0;
           this.email = '';
           this.password = '';
