@@ -161,6 +161,9 @@ All pages include decorative background circles:
 ### Register Page - Step 2 (Personal Information)
 ![Register Page Step 2](https://github.com/user-attachments/assets/f4f5fe79-0e84-4a3e-a676-aa2b0c4f7c6e)
 
+### Dashboard Page
+![Dashboard Page](https://github.com/user-attachments/assets/bb2ca0df-9775-4200-b486-5d060444cdbb)
+
 ## Comparison with Previous Design
 
 ### Before
