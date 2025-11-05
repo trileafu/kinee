@@ -1,100 +1,169 @@
 .root {
-    background: gray;
     display: flex;
     align-items: center;
     min-height: 100vh;
     justify-content: center;
-    background: linear-gradient(to bottom, #f2994a, #f2c94c);
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    position: relative;
+    overflow: hidden;
+}
+
+.root::before {
+    content: '';
+    position: absolute;
+    width: 500px;
+    height: 500px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    top: -250px;
+    right: -250px;
+}
+
+.root::after {
+    content: '';
+    position: absolute;
+    width: 400px;
+    height: 400px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    bottom: -200px;
+    left: -200px;
 }
 
 main {
     display: flex;
     align-items: center;
-    padding: 32px;
-    border-radius: 16px;
+    padding: 48px 40px;
+    border-radius: 24px;
     flex-direction: column;
-    background: white;
-    box-shadow: 12px -12px 0px 0px rgba(255, 255, 255, 0.5);
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    position: relative;
+    z-index: 1;
 }
 
 section {
     display: flex;
-    margin-top: 16px;
+    margin-top: 24px;
     width: 70vw;
-    max-width: 480px;
+    max-width: 420px;
     flex-direction: column;
 }
 
 h1 {
     margin: 0;
+    font-size: 2em;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
 }
 
 label {
-    font-size: 12px;
-    font-weight: 700;
+    font-size: 13px;
+    font-weight: 600;
+    color: #4a5568;
+    margin-bottom: 6px;
+    margin-top: 12px;
 }
 
 input {
-    border: 1px lightgray solid;
-    border-radius: 4px;
-    padding: 8px;
+    border: 2px solid #e0e7ff;
+    border-radius: 12px;
+    padding: 12px 16px;
     margin: 4px 0;
+    font-size: 15px;
+    transition: all 0.3s ease;
+    background: white;
+}
+
+input:focus {
+    outline: none;
+    border-color: #667eea;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+input::placeholder {
+    color: #cbd5e0;
 }
 
 button {
-    background: rgb(123, 80, 0);
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     border: none;
     text-align: center;
-    border-radius: 4px;
+    border-radius: 12px;
     color: white;
-    height: 32px;
-    padding: 8px;
+    font-weight: 600;
+    height: 48px;
+    padding: 12px 24px;
     margin-left: auto;
     margin-right: auto;
-    width: 80px;
-    margin-top: 8px;
+    width: 100%;
+    margin-top: 16px;
     cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+}
+
+button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(102, 126, 234, 0.5);
 }
 
 button:disabled {
-    opacity: .5;
+    opacity: .6;
+    cursor: not-allowed;
+    transform: none;
 }
 
 .register-link {
     text-decoration: none;
-    color: rgb(187, 121, 0);
-    font-weight: 700;
-    font-size: .8em;
+    color: #667eea;
+    font-weight: 600;
+    font-size: .9em;
+    transition: color 0.2s ease;
+}
+
+.register-link:hover {
+    color: #764ba2;
 }
 
 .forgot-link {
     text-decoration: none;
-    color: rgb(122, 79, 0);
-    font-weight: 700;
-    font-size: .8em;
+    color: #667eea;
+    font-weight: 600;
+    font-size: .85em;
+    transition: color 0.2s ease;
+}
+
+.forgot-link:hover {
+    color: #764ba2;
 }
 
 .checkbox-container {
     display: flex;
     align-items: center;
-    gap: 4px;
+    gap: 8px;
 }
 
 .checkbox-container > input {
     width: 20px;
     height: 20px;
     padding: 2px;
+    cursor: pointer;
 }
 
 .checkbox-container > label {
     text-decoration: none;
-    color: rgb(122, 79, 0);
-    font-weight: 700;
-    font-size: .8em;
+    color: #4a5568;
+    font-weight: 500;
+    font-size: .85em;
+    cursor: pointer;
 }
 
 .section-actions {
-    margin-top: 8px;
+    margin-top: 12px;
     display: flex;
     justify-content: space-between;
     align-items: center;
