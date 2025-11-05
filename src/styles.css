@@ -47,10 +47,11 @@ input[type="checkbox"]::before {
     content: "";
     width: 15px;
     height: 15px;
-    border-radius: 2px;
+    border-radius: 4px;
     transform: scale(0);
-    background-color: rgb(187, 121, 0);
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     transition: 120ms transform ease-in-out;
+    box-shadow: 0 2px 4px rgba(102, 126, 234, 0.3);
 }
 
 input[type="checkbox"]:checked::before {
@@ -62,7 +63,13 @@ input[type="radio"] {
     appearance: none;
     border-radius: 100%;
     background-color: #fff;
+    border: 2px solid #e0e7ff;
     margin: 0;
+    transition: all 0.2s ease;
+}
+
+input[type="radio"]:hover {
+    border-color: #667eea;
 }
 
 input[type="radio"]::before {
@@ -72,7 +79,7 @@ input[type="radio"]::before {
     height: 16px;
     border-radius: 100%;
     transform: scale(0);
-    background-color: black;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     transition: 120ms transform ease-in-out;
 }
 
